@@ -7,15 +7,12 @@ namespace SignalRTest
     public class Startup
     {
         public void Configuration(IAppBuilder app) {
-            app.Map("/signalr", map =>
-            {
-                map.UseCors(CorsOptions.AllowAll);
-                var hubConfiguration = new HubConfiguration
-                {
-                    // EnableJSONP = true
-                };
-                map.RunSignalR(hubConfiguration);
-            });
+
+            app.UseCors(CorsOptions.AllowAll);
+            var config = new HubConfiguration();
+            config.EnableJSONP = true;
+
+            app.MapSignalR(config);
         }
     }
 }
